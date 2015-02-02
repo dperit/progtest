@@ -14,6 +14,8 @@ angular.module('myApp.view1', ['ngRoute'])
     .controller('View1Ctrl', ['$http', '$scope', function($http, $scope) {
     $scope.newTweet = {};
     $scope.showUploadStatus = false;
+    $scope.numberOfTweets = 10;
+
     $scope.submitNewTweet = function(){
         $http.post('https://f1-dev-test.herokuapp.com/1.1/statuses/update.json',
             {'screen_name': 'f1Test',
@@ -30,29 +32,36 @@ angular.module('myApp.view1', ['ngRoute'])
     }
 
     function refreshTweets(){
-    $http.get('https://f1-dev-test.herokuapp.com/1.1/statuses/home_timeline.json',
-        {'screen_name': 'f1Test'}).
-        success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
-            data.forEach(function(tweet){
-                tweet.created_at = tweet.created_at.replace("+0000 ", "") + " UTC";
-                tweet.created_at = new Date(tweet.created_at);
+        $http.get('https://f1-dev-test.herokuapp.com/1.1/statuses/home_timeline.json',
+            {'screen_name': 'f1Test',
+                'count': $scope.numberOfTweets}).
+            success(function(data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                if (data){
+                    data.forEach(function(tweet){
+                        tweet.created_at = tweet.created_at.replace("+0000 ", "") + " UTC";
+                        tweet.created_at = new Date(tweet.created_at);
+                    });
+                    var dStr = "Fri Apr 09 12:53:54 +0000 2010";
+                    dStr = dStr.replace("+0000 ", "") + " UTC";
+                    var d = new Date(dStr);
+                }
+                $scope.tweets = data;
+
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
             });
-            var dStr = "Fri Apr 09 12:53:54 +0000 2010";
-            dStr = dStr.replace("+0000 ", "") + " UTC";
-            var d = new Date(dStr);
-
-
-            $scope.tweets = data;
-
-        }).
-        error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        });
     };
     refreshTweets();
+
+    $scope.$watch("numberOfTweets", function(newValue, oldValue){
+        if (newValue != oldValue){
+            refreshTweets();
+        }
+    });
 }]);
 
 //myApp.controller('GreetingController', ['$scope', function($scope) {

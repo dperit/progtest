@@ -9,7 +9,12 @@
     </div>
 </form>
 
+
+
+
 <div class="table">
+    <p>Displays {{numberOfTweets}} tweets</p>
+    <input class="slider" type="range"min="0" max="200" ng-model="numberOfTweets" />
     <div class="well tweet" ng-repeat="tweet in tweets">
         <h4 class="title">{{tweet.user.name}}</h4>
         <p>{{tweet.text}}</p>
