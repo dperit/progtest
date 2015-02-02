@@ -35,6 +35,15 @@ angular.module('myApp.view1', ['ngRoute'])
         success(function(data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
+            data.forEach(function(tweet){
+                tweet.created_at = tweet.created_at.replace("+0000 ", "") + " UTC";
+                tweet.created_at = new Date(tweet.created_at);
+            });
+            var dStr = "Fri Apr 09 12:53:54 +0000 2010";
+            dStr = dStr.replace("+0000 ", "") + " UTC";
+            var d = new Date(dStr);
+
+
             $scope.tweets = data;
 
         }).

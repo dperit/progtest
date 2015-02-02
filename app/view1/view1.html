@@ -13,6 +13,6 @@
     <div class="well tweet" ng-repeat="tweet in tweets">
         <h4 class="title">{{tweet.user.name}}</h4>
         <p>{{tweet.text}}</p>
+        <p>{{tweet.created_at | date:'short'}}</p>
     </div>
 </div>
-
