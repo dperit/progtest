@@ -2,3 +2,14 @@
     Name: {{tweet.user.name}}
     Text: {{tweet.text}}
 </div>
+
+<form ng-submit="submitNewTweet()">
+    <input type="text" id="tweetText" required maxlength="140" ng-maxlength="140" ng-model="newTweet.text" />
+    <button type="submit" class="btn">Tweet</button>
+    <div ng-show="tweetUploadSuccess && showUploadStatus">
+        Tweet successfully uploaded
+    </div>
+    <div ng-show="!tweetUploadSuccess && showUploadStatus">
+        Tweet not successfully uploaded
+    </div>
+</form>
