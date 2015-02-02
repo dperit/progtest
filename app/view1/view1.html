@@ -1,8 +1,3 @@
-<div ng-repeat="tweet in tweets">
-    Name: {{tweet.user.name}}
-    Text: {{tweet.text}}
-</div>
-
 <form ng-submit="submitNewTweet()">
     <input type="text" id="tweetText" required maxlength="140" ng-maxlength="140" ng-model="newTweet.text" />
     <button type="submit" class="btn">Tweet</button>
@@ -13,3 +8,11 @@
         Tweet not successfully uploaded
     </div>
 </form>
+
+<div class="table">
+    <div class="well tweet" ng-repeat="tweet in tweets">
+        <h4 class="title">{{tweet.user.name}}</h4>
+        <p>{{tweet.text}}</p>
+    </div>
+</div>
+
