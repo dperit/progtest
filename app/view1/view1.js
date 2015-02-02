@@ -21,6 +21,7 @@ angular.module('myApp.view1', ['ngRoute'])
             .success(function(data, status, headers, config){
                 $scope.tweetUploadSuccess = true;
                 $scope.showUploadStatus = true;
+                refreshTweets();
             })
             .error(function(data, status, headers, config){
                 $scope.tweetUploadSuccess = false;
@@ -28,6 +29,7 @@ angular.module('myApp.view1', ['ngRoute'])
             })
     }
 
+    function refreshTweets(){
     $http.get('https://f1-dev-test.herokuapp.com/1.1/statuses/home_timeline.json',
         {'screen_name': 'f1Test'}).
         success(function(data, status, headers, config) {
@@ -39,9 +41,9 @@ angular.module('myApp.view1', ['ngRoute'])
         error(function(data, status, headers, config) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
-            $scope.data = data;
-
         });
+    };
+    refreshTweets();
 }]);
 
 //myApp.controller('GreetingController', ['$scope', function($scope) {
