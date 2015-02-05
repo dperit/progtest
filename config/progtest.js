@@ -7,7 +7,7 @@ module.exports = function(app)
     ///////////////////////////////////////////////////////////////////
 
     // port: the port the application should be served on
-    app.set('port', process.env.PORT || 54291);
+    app.set('port', process.env.PORT || 5000);
     // databaseName: name of the MongoDB database to use
     app.set('databaseName', 'progtest');
     // apiPrefix: URL prefix for API routes
