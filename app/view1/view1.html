@@ -1,21 +1,20 @@
-<form ng-submit="submitNewTweet()">
-    <input type="text" id="tweetText" required maxlength="140" ng-maxlength="140" ng-model="newTweet.text" />
-    <button type="submit" class="btn">Tweet</button>
-    <div ng-show="tweetUploadSuccess && showUploadStatus">
-        Tweet successfully uploaded
-    </div>
-    <div ng-show="!tweetUploadSuccess && showUploadStatus">
-        Tweet not successfully uploaded
-    </div>
-</form>
+<div id="tweetSubmission">
+    <form ng-submit="submitNewTweet()">
+        <input type="text" id="tweetText" required maxlength="140" ng-maxlength="140" ng-model="newTweet.text" />
+        <button type="submit" class="btn">Tweet</button>
+        <div ng-show="tweetUploadSuccess && showUploadStatus">
+            Tweet successfully uploaded
+        </div>
+        <div ng-show="!tweetUploadSuccess && showUploadStatus">
+            Tweet not successfully uploaded
+        </div>
+    </form>
+</div>
 
-
-
-
-<div class="table">
-    <p>Displays {{numberOfTweets}} tweets</p>
-    <input class="slider" type="range"min="0" max="200" ng-model="numberOfTweets" />
-    <div class="well tweet" ng-repeat="tweet in tweets">
+<div id="tweetList" class="table">
+    <p>Displays {{tweetsToDisplay}} tweets</p>
+    <input class="slider" type="range"min="0" max="{{tweetsLoaded}}" ng-model="tweetsToDisplay" />
+    <div class="well tweet" ng-repeat="tweet in tweets | limitTo: tweetsToDisplay">
         <h4 class="title">{{tweet.user.name}}</h4>
         <p>{{tweet.text}}</p>
         <p>{{tweet.created_at | date:'short'}}</p>

@@ -29,14 +29,26 @@
   padding: 0;
 }
 
-.table div, p, a, h1, h2, h3, h4, h5 {
+/*.table div, p, a, h1, h2, h3, h4, h5 {
     max-width: 880px;
 }
 
 .slider {
     max-width:880px;
-}
+}*/
 
 .tweet{
 
+}
+
+#tweetSubmission{
+    margin-left: auto;
+    margin-right: auto;
+    width: 880px;
+}
+
+#tweetList{
+    margin-left: auto;
+    margin-right: auto;
+    width:880px;
 }

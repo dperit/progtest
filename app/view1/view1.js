@@ -14,7 +14,8 @@ angular.module('myApp.view1', ['ngRoute'])
     .controller('View1Ctrl', ['$http', '$scope', function($http, $scope) {
     $scope.newTweet = {};
     $scope.showUploadStatus = false;
-    $scope.numberOfTweets = 10;
+    $scope.tweetsToDisplay = 10;
+    $scope.tweetsToLoad = 150; //Max is 200
 
     $scope.submitNewTweet = function(){
         $http.post('https://f1-dev-test.herokuapp.com/1.1/statuses/update.json',
@@ -34,7 +35,7 @@ angular.module('myApp.view1', ['ngRoute'])
     function refreshTweets(){
         $http.get('https://f1-dev-test.herokuapp.com/1.1/statuses/home_timeline.json',
             {'screen_name': 'f1Test',
-                'count': $scope.numberOfTweets}).
+                'count': $scope.tweetsToLoad}).
             success(function(data, status, headers, config) {
                 // this callback will be called asynchronously
                 // when the response is available
@@ -48,6 +49,7 @@ angular.module('myApp.view1', ['ngRoute'])
                     var d = new Date(dStr);
                 }
                 $scope.tweets = data;
+                $scope.tweetsLoaded = data.length;
 
             }).
             error(function(data, status, headers, config) {
@@ -56,12 +58,6 @@ angular.module('myApp.view1', ['ngRoute'])
             });
     };
     refreshTweets();
-
-    $scope.$watch("numberOfTweets", function(newValue, oldValue){
-        if (newValue != oldValue){
-            refreshTweets();
-        }
-    });
 }]);
 
 //myApp.controller('GreetingController', ['$scope', function($scope) {
