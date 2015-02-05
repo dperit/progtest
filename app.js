@@ -19,10 +19,10 @@ var routes = require('./routes/index')(app);
 
 console.log("Connecting to database");
 // Use connect method to connect to the Server
-MongoClient.connect(url, function(err, db) {
-    assert.equal(null, err);
-    console.log("Connected correctly to database");
-    app.set("db", db);
+//MongoClient.connect(url, function(err, db) {
+//    assert.equal(null, err);
+//    console.log("Connected correctly to database");
+//    app.set("db", db);
 
     console.log("Progtest API going online...");
 // start application
@@ -30,7 +30,7 @@ MongoClient.connect(url, function(err, db) {
     app.listen(port);
     console.log("Progtest API online: listening on port " + port);
 
-});
+//});
 
 
 
