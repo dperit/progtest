@@ -1,6 +1,6 @@
 
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
+var assert = require('assert');
+//    , MongoClient = require('mongodb').MongoClient;
 
 // import express and start express app
 var express = require("express")
