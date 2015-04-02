@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.view1', ['ngRoute', 'ngSanitize'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view1', {
@@ -9,7 +9,9 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', ['$http', '$scope', function($http, $scope) {
+.controller('View1Ctrl', ['$http', '$scope', '$sanitize', function($http, $scope, $sanitize) {
+    $scope.result = {};
+    $scope.hasResults = false;
     $scope.performSearch = function(){
         $http({'method':'jsonp', 'url':'http://api.duckduckgo.com/', 'params':{'q': $scope.newSearchQuery,
                                                  't': 'sproutProgrammingTest',
@@ -17,8 +19,12 @@ angular.module('myApp.view1', ['ngRoute'])
                                                  'callback': 'JSON_CALLBACK'}})
             .success(function(data, status, headers, config){
                 $scope.result = data;
+                if (data.RelatedTopics.length > 0){
+                    $scope.hasResults = true;
+                }
             })
             .error(function(data, status, headers, config){
+                $scope.hasResults = false;
             });
     };
 

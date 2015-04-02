@@ -9,22 +9,11 @@
 </div>
 
 <div id="searchResults" class="table">
-    <div id="instantAnswer">
-        <p>{{result.Abstract}}</p>
-        <p>{{result.AbstractText}}</p>
-        <p>{{result.AbstractSource}}</p>
-        <p>{{result.AbstractURL}}</p>
-        <p>{{result.Image}}</p>
-        <p>{{result.Heading}}</p>
-        <p>{{result.Answer}}</p>
-        <p>{{result.AnswerType}}</p>
-        <p>{{result.Definition}}</p>
-        <p>{{result.DefinitionSource}}</p>
-        <p>{{result.DefinitionURL}}</p>
-        <p>{{result.RelatedTopics</p>
-        <p>{{result.Results}}</p>
-        <p>{{result.Type}}</p>
-        <p>{{result.Redirect}}</p>
+    <div id="results" ng-show="hasResults">
+        <div id="result" ng-repeat="result in result.RelatedTopics">
+            <img class="resultIcon" ng-src="{{result.Icon.URL}}">
+            <p ng-bind-html="result.Result"></p>
+        </div>
     </div>
 </div>
 
