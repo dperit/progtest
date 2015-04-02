@@ -30,6 +30,20 @@
 }
 
 img.resultIcon {
-    width:200px;
-    height: auto;
+    max-width:155px;
+    max-height: 100px;
+}
+
+#result {
+    padding-top:25px;
+    padding-bottom:25px;
+    border-bottom: 1px solid;
+}
+
+#result a {
+    display:block;
+}
+
+#pictureSpacing {
+    border-right: 200px;
 }

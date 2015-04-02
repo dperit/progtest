@@ -12,19 +12,23 @@ angular.module('myApp.view1', ['ngRoute', 'ngSanitize'])
 .controller('View1Ctrl', ['$http', '$scope', '$sanitize', function($http, $scope, $sanitize) {
     $scope.result = {};
     $scope.hasResults = false;
+    $scope.searchSuccess = true;
     $scope.performSearch = function(){
         $http({'method':'jsonp', 'url':'http://api.duckduckgo.com/', 'params':{'q': $scope.newSearchQuery,
                                                  't': 'sproutProgrammingTest',
                                                  'format': 'json',
                                                  'callback': 'JSON_CALLBACK'}})
             .success(function(data, status, headers, config){
-                $scope.result = data;
+                $scope.results = data;
+                $scope.numberOfResults = data.RelatedTopics.length;
+                $scope.searchSuccess = true;
                 if (data.RelatedTopics.length > 0){
                     $scope.hasResults = true;
                 }
             })
             .error(function(data, status, headers, config){
                 $scope.hasResults = false;
+                $scope.searchSuccess = false;
             });
     };
 
