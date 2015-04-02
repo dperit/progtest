@@ -13,7 +13,14 @@ angular.module('myApp.view1', ['ngRoute', 'ngSanitize'])
     $scope.result = {};
     $scope.hasResults = false;
     $scope.searchSuccess = true;
-    $scope.performSearch = function(){
+    $scope.previousSearches = [];
+    $scope.performSearch = function(dontAddToPreviousSearches){
+        if (!dontAddToPreviousSearches){
+            $scope.previousSearches.unshift($scope.newSearchQuery);
+            if ($scope.previousSearches.length > 5){
+                $scope.previousSearches.pop();
+            }
+        }
         $http({'method':'jsonp', 'url':'http://api.duckduckgo.com/', 'params':{'q': $scope.newSearchQuery,
                                                  't': 'sproutProgrammingTest',
                                                  'format': 'json',
@@ -31,6 +38,11 @@ angular.module('myApp.view1', ['ngRoute', 'ngSanitize'])
                 $scope.searchSuccess = false;
             });
     };
+
+    $scope.performPreviousSearch = function(searchNumber){
+        $scope.newSearchQuery = $scope.previousSearches[searchNumber];
+        $scope.performSearch(true);
+    }
 
 }]);
 

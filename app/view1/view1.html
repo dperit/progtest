@@ -8,6 +8,12 @@
     </form>
 </div>
 
+<div id="previousSearches">
+    <div id="previousSearch" ng-repeat="search in previousSearches">
+        <a href="" ng-click="performPreviousSearch($index)">{{search}}</a>
+    </div>
+</div>
+
 <div id="searchResults">
     <div id="results" ng-show="hasResults">
         Displaying {{numberOfResults}} results
@@ -18,8 +24,4 @@
             <p class="col-md-11" ng-bind-html="result.Result"></p>
         </div>
     </div>
-</div>
-
-<div id="previousSearches">
-
 </div>
